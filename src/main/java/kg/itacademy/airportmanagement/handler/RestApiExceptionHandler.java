@@ -37,6 +37,6 @@ public class RestApiExceptionHandler extends DefaultHandlerExceptionResolver {
         ErrorModel errorModel = new ErrorModel();
         errorModel.setMsg(ex.getMessage());
         errorModel.setExceptionClassName(ImDontKnowException.class.toString());
-        return ResponseEntity.internalServerError().body(errorModel);
+        return ResponseEntity.status(ex.getStatus()).body(errorModel);
     }
 }
