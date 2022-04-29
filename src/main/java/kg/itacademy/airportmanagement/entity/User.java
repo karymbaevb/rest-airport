@@ -1,7 +1,7 @@
 package kg.itacademy.airportmanagement.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +11,18 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BaseEntity {
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "login", nullable = false, unique = true)
+    String login;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "password", nullable = false)
+    String password;
+
+    @Column(name = "email", nullable = false, unique = true)
+    String email;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    Boolean isActive;
 }

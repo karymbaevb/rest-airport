@@ -4,8 +4,10 @@ import kg.itacademy.airportmanagement.entity.Airport;
 import kg.itacademy.airportmanagement.exceptions.AirportModelNullException;
 import kg.itacademy.airportmanagement.exceptions.AirportNotFoundException;
 import kg.itacademy.airportmanagement.model.AirportModel;
+import kg.itacademy.airportmanagement.repository.AircraftRepository;
 import kg.itacademy.airportmanagement.repository.AirportRepository;
 import kg.itacademy.airportmanagement.service.AirportService;
+import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AirportServiceImpl implements AirportService {
-    @Autowired
-    private AirportRepository airportRepository;
+
+    private final AirportRepository airportRepository;
 
     @Override
     public AirportModel create(AirportModel airportModel) {
@@ -25,8 +28,8 @@ public class AirportServiceImpl implements AirportService {
         //Валидация
         if (airportModel == null) {
             throw new AirportModelNullException("Create airport model is null");
-        } else if (airportModel.getAirportName() == null || airportModel.getAirportName().equals("")) {
-            throw new InvalidParameterException("airport name can't be empty");
+        } else if (Strings.isBlank(airportModel.getAirportName())) {
+            throw new InvalidParameterException("airport name can't be blank");
         }
 
         //Маппинг
