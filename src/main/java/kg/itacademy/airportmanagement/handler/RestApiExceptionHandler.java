@@ -1,6 +1,8 @@
 package kg.itacademy.airportmanagement.handler;
 
 
+import kg.itacademy.airportmanagement.exceptions.ImDontKnowException;
+import kg.itacademy.airportmanagement.model.ErrorModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -28,5 +30,13 @@ public class RestApiExceptionHandler extends DefaultHandlerExceptionResolver {
         }
 
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ImDontKnowException.class)
+    public ResponseEntity<ErrorModel> handleValidationExceptions(ImDontKnowException ex) {
+        ErrorModel errorModel = new ErrorModel();
+        errorModel.setMsg(ex.getMessage());
+        errorModel.setExceptionClassName(ImDontKnowException.class.toString());
+        return ResponseEntity.internalServerError().body(errorModel);
     }
 }
