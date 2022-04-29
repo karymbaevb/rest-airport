@@ -4,8 +4,11 @@ import kg.itacademy.airportmanagement.model.AirportModel;
 import kg.itacademy.airportmanagement.service.AirportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.List;
 @RequestMapping(path = "/api/airport")
 @Slf4j
 public class AirportController {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     AirportService airportService;

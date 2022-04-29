@@ -8,6 +8,7 @@ import kg.itacademy.airportmanagement.repository.RoleRepository;
 import kg.itacademy.airportmanagement.repository.UserRepository;
 import kg.itacademy.airportmanagement.repository.UserRoleRepository;
 import kg.itacademy.airportmanagement.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Service;
 import java.util.Base64;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;
