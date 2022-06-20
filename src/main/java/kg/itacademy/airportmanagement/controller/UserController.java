@@ -1,12 +1,14 @@
 package kg.itacademy.airportmanagement.controller;
 
 
+import kg.itacademy.airportmanagement.configuration.MyApplication;
 import kg.itacademy.airportmanagement.model.UserAuthModel;
 import kg.itacademy.airportmanagement.model.UserModel;
 import kg.itacademy.airportmanagement.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,9 @@ import javax.validation.Valid;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserController {
     final UserService userService;
+
+    @Autowired
+    private MyApplication myApplication;
 
     @PostMapping(path = "/sign-in")
     public String getAuthToken(@Valid @RequestBody UserAuthModel userAuthDto) {

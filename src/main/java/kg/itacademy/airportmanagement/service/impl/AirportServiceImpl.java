@@ -20,7 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 public class AirportServiceImpl implements AirportService {
 
-    private final AirportRepository airportRepository;
+   @Autowired
+    private  AirportRepository airportRepository;
 
     @Override
     public AirportModel create(AirportModel airportModel) {

@@ -1,16 +1,25 @@
 package kg.itacademy.airportmanagement.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kg.itacademy.airportmanagement.model.AirportModel;
+import kg.itacademy.airportmanagement.model.EmployeeApiModel;
 import kg.itacademy.airportmanagement.service.AirportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -22,6 +31,11 @@ public class AirportController {
 
     @Autowired
     AirportService airportService;
+
+    private ObjectMapper mapper = new ObjectMapper();
+
+    @Value("${myapplication.airport.iscreate}")
+    private Boolean isCreate;
 
     @PostMapping(path = "/create")
     public ResponseEntity<AirportModel> createNewAirport(@RequestBody AirportModel airportModel) {
@@ -84,7 +98,11 @@ public class AirportController {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
+
         }
     }
-}
 
+
+
+
+}

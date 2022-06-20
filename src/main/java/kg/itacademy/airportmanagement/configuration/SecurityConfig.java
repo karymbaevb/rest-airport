@@ -2,6 +2,7 @@ package kg.itacademy.airportmanagement.configuration;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -52,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/aircraft/*").hasRole("Admin")
 
                 .antMatchers(HttpMethod.GET, "/api/airport/*").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/airport/*").hasRole("Admin")
+                .antMatchers(HttpMethod.POST, "/api/airport/*").hasAnyRole("Admin", "Moderator", "User")
                 .antMatchers(HttpMethod.PUT, "/api/airport/*").hasRole("Admin")
                 .antMatchers(HttpMethod.DELETE, "/api/airport/*").hasRole("Admin")
 
